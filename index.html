@@ -1,28 +1,43 @@
-<script>
-HTML
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>JJK Story Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJK Story</title>
     <style>
-        body { margin: 0; background: black; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; font-family: sans-serif; }
-        canvas { border: 2px solid #444; background: #111; }
-        #ui-layer { position: absolute; top: 20px; left: 20px; pointer-events: none; }
+        body { margin: 0; background: #000; color: white; font-family: 'Courier New', Courier, monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        canvas { border: 2px solid #555; background: #111; display: block; }
+        #ui { position: absolute; text-align: center; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; }
+        button { padding: 15px 30px; font-size: 20px; cursor: pointer; background: #f00; color: white; border: none; font-weight: bold; text-transform: uppercase; }
+        button:hover { background: #b00; }
     </style>
 </head>
 <body>
 
-    <div id="title-screen">
-        <h1>JJK Story</h1>
-        <button id="start-button">Start Game</button>
+    <div id="ui">
+        <h1 id="title-screen">JJK STORY</h1>
+        <button id="start-button">START GAME</button>
     </div>
-
+    
     <canvas id="game-canvas" width="640" height="480"></canvas>
 
-    <script src="game.js"></script>
-</body>
-</html>
-const canvas = document.getElementById('game-canvas');
+    <script>
+    // --- YOUR GAME CODE STARTS HERE ---
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const titleScreen = document.getElementById('ui');
+    const startButton = document.getElementById('start-button');
+
+    // Add this event listener specifically
+    startButton.addEventListener('click', () => {
+        titleScreen.style.display = 'none';
+        gameStarted = true;
+        // if you have a start function, call it here, e.g., init();
+        console.log("Game Started!");
+    });
+
+    // const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 const titleScreen = document.getElementById('title-screen');
 const startButton = document.getElementById('start-button');
@@ -333,4 +348,17 @@ startButton.addEventListener('click', () => {
   showFlash('Welcome to JJK Story! Seek out cursed energy.');
   requestAnimationFrame(loop);
 });
-      </script>
+let gameStarted = false; // The game stays paused until this is true
+
+// This finds your button and tells it what to do
+startButton.addEventListener('click', () => {
+    titleScreen.style.display = 'none'; // Hides the JJK Story text and button
+    gameStarted = true;                 // Activates the game logic
+    gameLoop();                         // Starts the engine
+});
+    // 
+    
+    // 
+    </script>
+</body>
+</html>
